@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../../qteditor.h"
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -36,11 +37,13 @@ namespace {
 struct qt_meta_stringdata_CLASSQtEditorENDCLASS_t {};
 constexpr auto qt_meta_stringdata_CLASSQtEditorENDCLASS = QtMocHelpers::stringData(
     "QtEditor",
-    "newFile",
-    "",
     "openFile",
+    "",
     "quitFile",
-    "undoFile"
+    "undoFile",
+    "redoFile",
+    "newFile",
+    "QTextEdit*"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -53,7 +56,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSQtEditorENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -61,16 +64,18 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSQtEditorENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   38,    2, 0x0a,    1 /* Public */,
-       3,    0,   39,    2, 0x0a,    2 /* Public */,
-       4,    0,   40,    2, 0x0a,    3 /* Public */,
-       5,    0,   41,    2, 0x0a,    4 /* Public */,
+       1,    0,   44,    2, 0x0a,    1 /* Public */,
+       3,    0,   45,    2, 0x0a,    2 /* Public */,
+       4,    0,   46,    2, 0x0a,    3 /* Public */,
+       5,    0,   47,    2, 0x0a,    4 /* Public */,
+       6,    0,   48,    2, 0x0a,    5 /* Public */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    0x80000000 | 7,
 
        0        // eod
 };
@@ -84,14 +89,16 @@ Q_CONSTINIT const QMetaObject QtEditor::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSQtEditorENDCLASS_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<QtEditor, std::true_type>,
-        // method 'newFile'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'openFile'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'quitFile'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'undoFile'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'redoFile'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'newFile'
+        QtPrivate::TypeAndForceComplete<QTextEdit *, std::false_type>
     >,
     nullptr
 } };
@@ -102,14 +109,15 @@ void QtEditor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         auto *_t = static_cast<QtEditor *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->newFile(); break;
-        case 1: _t->openFile(); break;
-        case 2: _t->quitFile(); break;
-        case 3: _t->undoFile(); break;
+        case 0: _t->openFile(); break;
+        case 1: _t->quitFile(); break;
+        case 2: _t->undoFile(); break;
+        case 3: _t->redoFile(); break;
+        case 4: { QTextEdit* _r = _t->newFile();
+            if (_a[0]) *reinterpret_cast< QTextEdit**>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 const QMetaObject *QtEditor::metaObject() const
@@ -131,13 +139,13 @@ int QtEditor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }
