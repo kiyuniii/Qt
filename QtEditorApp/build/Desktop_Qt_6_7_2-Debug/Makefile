@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
-INCPATH       = -I../../../QtEditorApp -I. -I../../../../Qt/6.7.2/gcc_64/include -I../../../../Qt/6.7.2/gcc_64/include/QtWidgets -I../../../../Qt/6.7.2/gcc_64/include/QtGui -I../../../../Qt/6.7.2/gcc_64/include/QtCore -I. -I../../../../Qt/6.7.2/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../../../QtEditorApp -I. -I../../../../Qt/6.7.2/gcc_64/include -I../../../../Qt/6.7.2/gcc_64/include/QtPrintSupport -I../../../../Qt/6.7.2/gcc_64/include/QtWidgets -I../../../../Qt/6.7.2/gcc_64/include/QtGui -I../../../../Qt/6.7.2/gcc_64/include/QtCore -I. -I../../../../Qt/6.7.2/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/kiyun/Qt/6.7.2/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = QtEditorApp1.0.0
 DISTDIR = /home/kiyun/QtCpp/QtEditorApp/build/Desktop_Qt_6_7_2-Debug/.tmp/QtEditorApp1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/kiyun/Qt/6.7.2/gcc_64/lib -Wl,-rpath-link,/home/kiyun/Qt/6.7.2/gcc_64/lib
-LIBS          = $(SUBLIBS) /home/kiyun/Qt/6.7.2/gcc_64/lib/libQt6Widgets.so /home/kiyun/Qt/6.7.2/gcc_64/lib/libQt6Gui.so /home/kiyun/Qt/6.7.2/gcc_64/lib/libQt6Core.so -lpthread -lGL   
+LIBS          = $(SUBLIBS) /home/kiyun/Qt/6.7.2/gcc_64/lib/libQt6PrintSupport.so /home/kiyun/Qt/6.7.2/gcc_64/lib/libQt6Widgets.so /home/kiyun/Qt/6.7.2/gcc_64/lib/libQt6Gui.so /home/kiyun/Qt/6.7.2/gcc_64/lib/libQt6Core.so -lpthread -lGL   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -480,6 +480,7 @@ Makefile: ../../QtEditorApp.pro ../../../../Qt/6.7.2/gcc_64/mkspecs/features/spe
 		../../../../Qt/6.7.2/gcc_64/mkspecs/features/lex.prf \
 		../../QtEditorApp.pro \
 		../../qteditor.qrc \
+		../../../../Qt/6.7.2/gcc_64/lib/libQt6PrintSupport.prl \
 		../../../../Qt/6.7.2/gcc_64/lib/libQt6Widgets.prl \
 		../../../../Qt/6.7.2/gcc_64/lib/libQt6Gui.prl \
 		../../../../Qt/6.7.2/gcc_64/lib/libQt6Core.prl
@@ -689,6 +690,7 @@ Makefile: ../../QtEditorApp.pro ../../../../Qt/6.7.2/gcc_64/mkspecs/features/spe
 ../../../../Qt/6.7.2/gcc_64/mkspecs/features/lex.prf:
 ../../QtEditorApp.pro:
 ../../qteditor.qrc:
+../../../../Qt/6.7.2/gcc_64/lib/libQt6PrintSupport.prl:
 ../../../../Qt/6.7.2/gcc_64/lib/libQt6Widgets.prl:
 ../../../../Qt/6.7.2/gcc_64/lib/libQt6Gui.prl:
 ../../../../Qt/6.7.2/gcc_64/lib/libQt6Core.prl:
@@ -950,9 +952,13 @@ moc_qteditor.cpp: ../../qteditor.h \
 		../../../../Qt/6.7.2/gcc_64/include/QtGui/qtextcursor.h \
 		../../../../Qt/6.7.2/gcc_64/include/QtGui/qtextformat.h \
 		../../../../Qt/6.7.2/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/QMessageBox \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
 		moc_predefs.h \
 		../../../../Qt/6.7.2/gcc_64/libexec/moc
-	/home/kiyun/Qt/6.7.2/gcc_64/libexec/moc $(DEFINES) --include /home/kiyun/QtCpp/QtEditorApp/build/Desktop_Qt_6_7_2-Debug/moc_predefs.h -I/home/kiyun/Qt/6.7.2/gcc_64/mkspecs/linux-g++ -I/home/kiyun/QtCpp/QtEditorApp -I/home/kiyun/Qt/6.7.2/gcc_64/include -I/home/kiyun/Qt/6.7.2/gcc_64/include/QtWidgets -I/home/kiyun/Qt/6.7.2/gcc_64/include/QtGui -I/home/kiyun/Qt/6.7.2/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../qteditor.h -o moc_qteditor.cpp
+	/home/kiyun/Qt/6.7.2/gcc_64/libexec/moc $(DEFINES) --include /home/kiyun/QtCpp/QtEditorApp/build/Desktop_Qt_6_7_2-Debug/moc_predefs.h -I/home/kiyun/Qt/6.7.2/gcc_64/mkspecs/linux-g++ -I/home/kiyun/QtCpp/QtEditorApp -I/home/kiyun/Qt/6.7.2/gcc_64/include -I/home/kiyun/Qt/6.7.2/gcc_64/include/QtPrintSupport -I/home/kiyun/Qt/6.7.2/gcc_64/include/QtWidgets -I/home/kiyun/Qt/6.7.2/gcc_64/include/QtGui -I/home/kiyun/Qt/6.7.2/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../qteditor.h -o moc_qteditor.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1167,6 +1173,10 @@ main.o: ../../main.cpp ../../qteditor.h \
 		../../../../Qt/6.7.2/gcc_64/include/QtGui/qtextcursor.h \
 		../../../../Qt/6.7.2/gcc_64/include/QtGui/qtextformat.h \
 		../../../../Qt/6.7.2/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/QMessageBox \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/QApplication \
 		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
@@ -1368,6 +1378,10 @@ qteditor.o: ../../qteditor.cpp ../../qteditor.h \
 		../../../../Qt/6.7.2/gcc_64/include/QtGui/qtextcursor.h \
 		../../../../Qt/6.7.2/gcc_64/include/QtGui/qtextformat.h \
 		../../../../Qt/6.7.2/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/QMessageBox \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qmessagebox.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qdialog.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/QMenuBar \
 		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qmenubar.h \
 		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qmenu.h \
@@ -1401,7 +1415,25 @@ qteditor.o: ../../qteditor.cpp ../../qteditor.h \
 		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/QStatusBar \
 		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qstatusbar.h \
 		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/QDockWidget \
-		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qdockwidget.h
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qdockwidget.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/QMdiArea \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qmdiarea.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/QMdiSubWindow \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qmdisubwindow.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/QFileDialog \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qfiledialog.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtCore/qdir.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtCore/qfile.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtCore/qfiledevice.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtCore/qfileinfo.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtCore/qdatetime.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtCore/qcalendar.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtCore/qtimezone.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtCore/QDebug \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/QColorDialog \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qcolordialog.h \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/QFontDialog \
+		../../../../Qt/6.7.2/gcc_64/include/QtWidgets/qfontdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qteditor.o ../../qteditor.cpp
 
 qrc_qteditor.o: qrc_qteditor.cpp 
